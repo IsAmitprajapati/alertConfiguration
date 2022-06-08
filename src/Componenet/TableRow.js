@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 
-const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, freq}) => {
+const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, freq,onchangeclick}) => {
     const [formData, setFormData] = useState({
         alertName: '',
         indepOption: [],
@@ -9,6 +9,8 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
         frequency: ''
 
     })
+    const [alldata,setalldata] = useState([])
+
     const {indepOption,dependedOptions} = formData
 
     const [newInput, setnewInput] = useState('')
@@ -21,12 +23,14 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
           [event.target.name]: event.target.value
         }))
     }
-    
     const handleSubmit = () =>{
         const pref = {newInput, indepOption, dependedOptions, newFrequency}
         console.log(pref)
-        console.log("data saved")
+        console.log("data saved")  
+        
+        
     }
+   
     
 
 
@@ -70,8 +74,8 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
                 <input name='freq'  className='freq' onChange={(e) => setNewFrequency(e.target.value) } placeholder='min' type="number" defaultValue={freq} />
             </td>
             <td>
-                <button onClick={handleSubmit} type='submit' className='save-btn' >
-                    save
+                <button onClick={onchangeclick} type='submit' className='save-btn' >
+                    save{/*handleSubmit*/}
                 </button>
             </td>
         </tr>

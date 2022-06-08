@@ -39,6 +39,11 @@ export const Table = () => {
     setnewRow([...newRow, newData])
    
   }
+  const alldataprint = ()=>{
+    console.log("printing all data")
+    console.log(newRow)
+  }
+  // console.log(...newRow)
   useEffect(() =>{
     setnewRow([...data])
   }, [])
@@ -74,7 +79,8 @@ export const Table = () => {
           dataName={data.alert_name} 
           independent={data.independent_var} 
           dependent={data.dependent_var} 
-          key={index} />
+          key={index}
+          onchangeclick = {alldataprint} />
 
         )
       })}
