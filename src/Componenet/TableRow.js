@@ -1,39 +1,7 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
 
-const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, freq,onchangeclick}) => {
-    const [formData, setFormData] = useState({
-        alertName: '',
-        indepOption: [],
-        dependedOptions: [],
-        frequency: ''
-
-    })
-    const [alldata,setalldata] = useState([])
-
-    const {indepOption,dependedOptions} = formData
-
-    const [newInput, setnewInput] = useState('')
-    const[newFrequency, setNewFrequency] = useState(null)
-   
-
-    const onChange = (event)=>{
-        setFormData((preve) => ({
-          ...preve, 
-          [event.target.name]: event.target.value
-        }))
-    }
-    const handleSubmit = () =>{
-        const pref = {newInput, indepOption, dependedOptions, newFrequency}
-        console.log(pref)
-        console.log("data saved")  
-        
-        
-    }
-   
-    
-
-
+const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, freq}) => {
     
     const independentOptions = [
         { value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' },
@@ -50,31 +18,74 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
     const handleDelete = ({id}) =>{
         setnewRow(newRow.filter((row) => row.id !== id))
     }
+
+    /***********/
+    const [allprint, setallprint] = useState({
+        alert_Name : "",
+        Independent_value : "",
+        Dependent_value : "",
+        Frequency : "",
+    })
+    const [selectedValue, setSelectedValue] = useState([]);
+    const handlechange= (e)=>{
+        e.preventDefault()
+        setallprint((preve)=>{
+            return{
+                ...preve,
+                [e.target.name] : e.target.value,
+                Independent_value  : JSON.stringify(selectedValue, false, false) 
+                
+            }
+        })
+    }
+    const handleSubmits = () =>{
+        console.log(allprint)
+    } 
+    const handleChangess = (e) => {
+        setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
+      }
     return (
         <tr>
             <td>
                 <button onClick={() => handleDelete(data)} className='btn-del' >x</button>
             </td>
             <td className='td-name'>
-                <input name='alertName' onChange={(event) => setnewInput(event.target.value)} defaultValue={dataName} type="text"  />
+                <input name='alert_Name' onChange={handlechange} defaultValue={dataName} type="text"  />
             </td>
             <td>
-                <Select name='indepOption' onInputChange={indepOption}   defaultValue={[independent[0], independent[1]]}  
-                isMulti options={independentOptions} />
+                <Select  onChange={handleChangess}
+                name='Independent_value'
+                defaultValue={[independent[0], independent[1]]}   
+                isMulti 
+                options={independentOptions}
+                
+                
+                 />
             </td>
             <td>
                 <Select
-                name='dependedOptions'
+                name='Dependent_value'
                 defaultValue={dependent}
-                onInputChange={dependedOptions}
+                onChange={(e)=>setallprint((preve)=>{
+                    return{
+                        ...preve,
+                        Dependent_value : e.value
+                    }
+                })}
                 options={dependentOptions} />
             </td>
 
             <td>
-                <input name='freq'  className='freq' onChange={(e) => setNewFrequency(e.target.value) } placeholder='min' type="number" defaultValue={freq} />
+                <input 
+                    name='Frequency'
+                    className='freq'
+                    onChange={handlechange}
+                    placeholder='min'
+                    type="number"
+                    defaultValue={freq} />
             </td>
             <td>
-                <button onClick={onchangeclick} type='submit' className='save-btn' >
+                <button onClick={handleSubmits} type='submit' className='save-btn'  >
                     save{/*handleSubmit*/}
                 </button>
             </td>

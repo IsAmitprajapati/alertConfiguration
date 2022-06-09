@@ -8,7 +8,6 @@ function App() {
     <div className="App">
       <h1>Alert configuration</h1>
       <hr />
-
       <Table />
     </div>
   );
