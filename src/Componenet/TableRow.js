@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 
 const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, freq}) => {
@@ -33,7 +33,7 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
             return{
                 ...preve,
                 [e.target.name] : e.target.value,
-                Independent_value  : JSON.stringify(selectedValue, false, false) 
+               
                 
             }
         })
@@ -41,9 +41,15 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
     const handleSubmits = () =>{
         console.log(allprint)
     } 
-    const handleChangess = (e) => {
-        setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
-      }
+   
+    useEffect(()=>{
+        setallprint((preve)=>{
+            return{
+                ...preve,
+                Independent_value  : JSON.stringify(selectedValue) 
+            }
+        })
+    },[selectedValue])
     return (
         <tr>
             <td>
@@ -53,13 +59,12 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
                 <input name='alert_Name' onChange={handlechange} defaultValue={dataName} type="text"  />
             </td>
             <td>
-                <Select  onChange={handleChangess}
-                name='Independent_value'
-                defaultValue={[independent[0], independent[1]]}   
-                isMulti 
-                options={independentOptions}
-                
-                
+                <Select  
+                    onChange={setSelectedValue}
+                    name='Independent_value'
+                    defaultValue={independent}   
+                    isMulti 
+                    options={independentOptions}
                  />
             </td>
             <td>

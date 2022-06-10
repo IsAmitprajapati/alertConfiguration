@@ -2,22 +2,24 @@ import React, { useEffect, useState } from 'react'
 import TableRow from './TableRow'
 import { v4 as uuidv4 } from 'uuid';
 import "./style.css"
+import FixedTable from './Fixedtable';
 
 export const Table = () => {
-  const data = [{
-    id: uuidv4(),
-    alert_name: 'alert 1',
-    independent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, { value: 'ME Speed (Avg.)', label: 'ME Speed (Avg.)' }],
-    dependent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, ],
-    freq: 10 
-  },
-  {
-    id: uuidv4(),
-    alert_name: 'alert 1',
-    independent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, { value: 'Rate of Return (Avg.)', label: 'Rate of Return (Avg.)' }],
-    dependent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, ],
-    freq: 10 
-  },
+  const data = [
+  //   {
+  //   id: uuidv4(),
+  //   alert_name: 'alert 1',
+  //   independent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, { value: 'ME Speed (Avg.)', label: 'ME Speed (Avg.)' }],
+  //   dependent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, ],
+  //   freq: 10 
+  // },
+  // {
+  //   id: uuidv4(),
+  //   alert_name: 'alert 1',
+  //   independent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, { value: 'Rate of Return (Avg.)', label: 'Rate of Return (Avg.)' }],
+  //   dependent_var: [{ value: 'ME Torge (Avg.)', label: 'ME Torge (Avg.)' }, ],
+  //   freq: 10 
+  // },
   {
     id: uuidv4(),
     alert_name: '',
@@ -67,7 +69,11 @@ export const Table = () => {
       
       <th>Save</th>
     </tr>
+    <FixedTable/>
     <>
+
+
+
       {newRow?.map((data, index) => {
         return (
          
