@@ -46,10 +46,13 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
         setallprint((preve)=>{
             return{
                 ...preve,
-                Independent_value  : JSON.stringify(selectedValue) 
+                Independent_value  : selectedValue
+                // (JSON.stringify(selectedValue))
             }
         })
     },[selectedValue])
+
+    
     return (
         <tr>
             <td>
@@ -66,6 +69,12 @@ const TableRow = ({dataName, data, newRow, setnewRow, independent, dependent, fr
                     isMulti 
                     options={independentOptions}
                  />
+                 {/* <select>
+                    <option>ME Torge (Avg.)</option>
+                    <option>ME Speed (Avg.)</option>
+                    <option>Rate of Return (Avg.)</option>
+
+                 </select> */}
             </td>
             <td>
                 <Select

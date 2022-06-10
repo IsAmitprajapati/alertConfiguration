@@ -32,7 +32,8 @@ export default function FixedTable(){
         setFixed1((preve)=>{
             return{
                 ...preve,
-                Independent_value  : JSON.stringify(selectedValue)
+                Independent_value  : selectedValue
+                // JSON.stringify(selectedValue)
             }
         })
     },[selectedValue])
@@ -40,7 +41,8 @@ export default function FixedTable(){
         setFixed2((preve)=>{
             return{
                 ...preve,
-                Independent_value  : JSON.stringify(selectedValue2)
+                Independent_value  : selectedValue2
+                // JSON.stringify(selectedValue2)
             }
         })
     },[selectedValue2])
